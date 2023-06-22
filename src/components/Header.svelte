@@ -1,6 +1,9 @@
 <script>
     import { mode } from '../stores';
-    import { MODES } from '../api';
+    import { getModes } from '../api';
+
+    let modes;
+    $: modes = getModes();
 </script>
 
 <header>
@@ -11,9 +14,11 @@
         </div>
         <div class="links">
             <select bind:value={$mode}>
-                {#each MODES as m}
-                    <option value={m}>{m}</option>
-                {/each}
+                {#await modes then modes}
+                    {#each modes as m}
+                        <option value={m.short_name}>{m.short_name}</option>
+                    {/each}
+                {/await}
             </select>
             <a href="#/search">Search</a>
             <a href="#/login">Login</a>

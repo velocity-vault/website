@@ -1,5 +1,5 @@
 <script>
-    import { getMapTop } from "../api";
+    import { getMap, getMapTop } from "../api";
     import { mode } from "../stores";
     import { push } from 'svelte-spa-router';
 
@@ -22,6 +22,8 @@
 
     let maptop;
     $: maptop = getMapTop($mode, name, course, kind);
+    let info;
+    $: info = getMap($mode, name);
 </script>
 
 <div class="title">{name}</div>
@@ -32,8 +34,15 @@
     <option value="PRO">PRO</option>
 </select>
 <select bind:value={course}>
-    <option value="0">Bonus 0</option>
-    <option value="1">Bonus 1</option>
+    {#await info then info}
+        {#each info.courses as c}
+            {#if c.course == 0}
+                <option value={c.course.toString()}>Main</option>
+            {:else}
+                <option value={c.course.toString()}>Bonus {c.course}</option>
+            {/if}
+        {/each}
+    {/await}
 </select>
 <hr>
 
