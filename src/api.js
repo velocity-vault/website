@@ -1,6 +1,4 @@
 
-export const MODES = [];
-
 export async function getMap(mode, map) {
     let url = new URL('http://localhost:9000/get_map');
     url.searchParams.append('mode', mode);
@@ -50,4 +48,29 @@ export async function getModes() {
     }
     let result = await response.json();
     return result;    
+}
+
+export async function searchMaps(mode, query) {
+    let url = new URL('http://localhost:9000/search_maps');
+    url.searchParams.append('mode', mode);
+    url.searchParams.append('query', query);
+
+    let response = await fetch(url);
+    if (!response.ok) {
+        throw new Error("!response.ok");
+    }
+    let result = await response.json();
+    return result;
+}
+
+export async function searchPlayers(query) {
+    let url = new URL('http://localhost:9000/search_players');
+    url.searchParams.append('query', query);
+
+    let response = await fetch(url);
+    if (!response.ok) {
+        throw new Error("!response.ok");
+    }
+    let result = await response.json();
+    return result;
 }
