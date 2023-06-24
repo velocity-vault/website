@@ -74,3 +74,17 @@ export async function searchPlayers(query) {
     let result = await response.json();
     return result;
 }
+
+export const STEAM_AUTH_URL = "http://localhost:9000/steam_auth";
+
+export async function verifySteamAuth(searchParams) {
+    let url = new URL('http://localhost:9000/steam_auth_verify');
+    url.search = searchParams;
+
+    let response = await fetch(url);
+    if (!response.ok) {
+        throw new Error("!response.ok");
+    }
+    let result = await response.json();
+    return result;
+}
