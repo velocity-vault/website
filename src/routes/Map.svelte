@@ -21,7 +21,7 @@
 
     // Update the URI if we change the params.
     $: {
-        let queryparams = new URLSearchParams({
+        const queryparams = new URLSearchParams({
             'course': course,
             'kind':   kind,
         });
