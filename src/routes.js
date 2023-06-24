@@ -8,7 +8,6 @@ export default {
     '/': Home,
     '/maps': MapList,
     '/maps/:name': Map,
-    '/maps/:name/:course': Map,
     '/search': Search,
     '/search/:query': Search,
 
