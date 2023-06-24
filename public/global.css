@@ -1,3 +1,8 @@
+:root {
+	--fg-color: #ddd;
+	--bg-color: #112;
+	--bg-color-secondary: #32324e;
+}
 
 html {
     overflow-y: scroll;
@@ -7,8 +12,8 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	color: #ddd;
-	background: #112;
+	color: var(--fg-color);
+	background: var(--bg-color);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;	
 }
 

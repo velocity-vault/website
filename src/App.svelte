@@ -2,9 +2,13 @@
 	import Router from 'svelte-spa-router';
 	import routes from './routes';
     import Header from './components/Header.svelte';
+	import { location } from 'svelte-spa-router';
 </script>
 
-<Header />
+{#if $location !== '/steam_auth'}
+	<Header />
+{/if}
+
 <main>
 	<Router {routes} />
 </main>

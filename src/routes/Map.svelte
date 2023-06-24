@@ -2,6 +2,7 @@
     import { getMap, getMapTop } from "../api";
     import { mode } from "../stores";
     import { replace, querystring } from 'svelte-spa-router';
+    import MapTop from "../components/MapTop.svelte";
 
     export let params = {};
 
@@ -42,7 +43,6 @@
     <option value="PRO">PRO</option>
 </select>
 
-
 {#await mapinfo then mapinfo}
     <select bind:value={course}>
         {#each mapinfo.courses as c}
@@ -56,42 +56,11 @@
 {/await}
 <hr>
 
-<div class="grid">
-    <div>rank</div>
-    <div>player</div>
-    <div>time</div>
-    <div>teleports</div>
-    <div>time</div>
-</div>
-<div class="maptop">
-    {#await maptop then maptop}
-        {#each maptop as run, i}
-            <div class="grid">
-                <div>#{i+1}</div>
-                <div><a href="#/players/{run.player_id}">{run.player_name}</a></div>
-                <div>{run.ticks/128}</div>
-                <div>{run.teleports}</div>
-                <div>{run.created_at}</div>
-            </div>
-        {/each}
-    {/await}
-</div>
+<MapTop mode={mode} map={name} course={course} kind={kind} />
 
 <style>
     .title {
         font-size: 1.5rem;
         font-weight: 600;
-    }
-    .grid {
-        display: grid;
-        grid-template-columns: minmax(0, 0.2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
-        gap: 15px;
-    }
-    .grid div {
-        white-space: nowrap;
-        overflow: hidden;
-    }
-    .maptop .grid:nth-child(odd) {
-        background: #32324e;
     }
 </style>

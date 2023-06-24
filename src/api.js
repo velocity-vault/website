@@ -39,6 +39,22 @@ export async function getMapTop(mode, map, course, kind) {
     return result;    
 }
 
+export async function getCoursePbHistory(player_id, mode, map, course, kind) {
+    let url = new URL('http://localhost:9000/get_course_pb_history');
+    url.searchParams.append('player_id', player_id);
+    url.searchParams.append('mode', mode);
+    url.searchParams.append('map', map);
+    url.searchParams.append('course', course);
+    url.searchParams.append('kind', kind);
+
+    let response = await fetch(url);
+    if (!response.ok) {
+        throw new Error("!response.ok");
+    }
+    let result = await response.json();
+    return result;    
+}
+
 export async function getModes() {
     let url = new URL('http://localhost:9000/get_modes');
 
