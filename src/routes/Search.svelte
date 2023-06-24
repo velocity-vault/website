@@ -11,12 +11,12 @@
     onParamsChanged();
     window.addEventListener('hashchange', onParamsChanged);
     function onParamsChanged() {
-        delayedQuery = params.query ?? '';
-        textboxQuery = params.query ?? '';
+        delayedQuery = params.query ? decodeURIComponent(params.query) : '';
+        textboxQuery = delayedQuery;
     }
 
     // Update the page if we change the params.
-    $: push(`/search/${delayedQuery}`);
+    $: push(`/search/${encodeURIComponent(delayedQuery)}`);
 
     let mapResults = [];
     let playerResults = [];
