@@ -10,6 +10,7 @@ export default {
     '/maps/:name': Map,
     '/maps/:name/:course': Map,
     '/search': Search,
+    '/search/:query': Search,
 
     // The catch-all route must always be last
     '*': NotFound,

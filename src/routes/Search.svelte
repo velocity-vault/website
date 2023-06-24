@@ -1,9 +1,22 @@
 <script>
     import { searchMaps, searchPlayers } from '../api';
     import { mode } from '../stores';
+    import { push } from 'svelte-spa-router';
 
-    let textboxQuery = '';
+    export let params = {};
+
+    // Extract all params so we can react to changes independently.
     let delayedQuery = '';
+    let textboxQuery = '';
+    onParamsChanged();
+    window.addEventListener('hashchange', onParamsChanged);
+    function onParamsChanged() {
+        delayedQuery = params.query ?? '';
+        textboxQuery = params.query ?? '';
+    }
+
+    // Update the page if we change the params.
+    $: push(`/search/${delayedQuery}`);
 
     let mapResults = [];
     let playerResults = [];
